@@ -35,7 +35,20 @@ Jiné prostředí: `BASE_URL=https://jina-instance/cs/ npm test`
 
 ## CI
 
-GitHub Actions (`.github/workflows/playwright.yml`) se spouští při pushi a PR do `main`, každý všední den v 6:00 UTC a ručně (`workflow_dispatch`). HTML report (trace, screenshoty a video u selhaných testů) se ukládá jako artefakt `playwright-report`.
+GitHub Actions (`.github/workflows/playwright.yml`) se spouští při pushi a PR do `main`, každý všední den v 6:00 UTC a ručně. HTML report (trace, screenshoty a video u selhaných testů) se ukládá jako artefakt `playwright-report-<číslo běhu>`.
+
+### Ruční spuštění
+
+GitHub → záložka **Actions** → **Playwright Tests** → **Run workflow**. Volitelné parametry:
+
+| Parametr | Význam | Výchozí |
+|---|---|---|
+| Které testy spustit | `vse` / `kosik` / `ucet` / `objednavka` | `vse` |
+| Filtr podle názvu testu | `--grep`, např. `registrace` | prázdné |
+| Testované prostředí | base URL | `https://prestashop.tesena.com/cs/` |
+| Kolikrát spustit každý test | `--repeat-each` (kontrola stability) | `1` |
+
+Z příkazové řádky (GitHub CLI): `gh workflow run playwright.yml -f suite=kosik -f repeat_each=3`
 
 ## Poznámky
 
